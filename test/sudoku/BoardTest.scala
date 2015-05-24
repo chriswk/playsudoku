@@ -11,32 +11,32 @@ object RowTest extends PlaySpecification {
 
   "Row" should {
     "deindex correctly for empty row" in {
-      SudokuNumber.all map { emptyRow(_) } must equalTo(List.fill(9)(None))
+      SudokuNumber.all map { emptyRow(_) } must be_===(List.fill(9)(None))
     }
 
     "deindex correctly for partial row" in {
-      SudokuNumber.all.map { partialRow(_) } must equalTo(
+      SudokuNumber.all.map { partialRow(_) } must be_===(
         List(Some(Eight), None, None, Some(Five), Some(Four), None, None, Some(One), Some(Nine))
       )
     }
 
     "deindex correctly for full row" in {
-      SudokuNumber.all.map { fullRow(_) } must equalTo(
+      SudokuNumber.all.map { fullRow(_) } must be_===(
         List(Some(Eight), Some(Seven), Some(Six), Some(Five), Some(Four), Some(Three), Some(Two), Some(One), Some(Nine))
       )
     }
 
     "deindex correctly for invalid row" in {
-      SudokuNumber.all.map { invalidRow(_) } must equalTo(
+      SudokuNumber.all.map { invalidRow(_) } must be_===(
         List(Some(Eight), None, None, Some(Five), Some(Four), Some(Five), None, Some(One), Some(Nine))
       )
     }
 
     "have equality test based on immutability" in {
-      emptyRow must equalTo(Row.empty)
-      partialRow must equalTo(Row(Some(Eight), None, None, Some(Five), Some(Four), None, None, Some(One), Some(Nine)))
-      fullRow must equalTo(Row(Some(Eight), Some(Seven), Some(Six), Some(Five), Some(Four), Some(Three), Some(Two), Some(One), Some(Nine)))
-      invalidRow must equalTo(partialRow.copy(sixth = Some(Five)))
+      emptyRow must be_===(Row.empty)
+      partialRow must be_===(Row(Some(Eight), None, None, Some(Five), Some(Four), None, None, Some(One), Some(Nine)))
+      fullRow must be_===(Row(Some(Eight), Some(Seven), Some(Six), Some(Five), Some(Four), Some(Three), Some(Two), Some(One), Some(Nine)))
+      invalidRow must be_===(partialRow.copy(sixth = Some(Five)))
     }
   }
 
@@ -52,35 +52,35 @@ object ColumnTest extends PlaySpecification {
     "deindex correctly for empty column" in {
       SudokuNumber.all map {
         emptyColumn(_)
-      } must equalTo(
+      } must be_===(
         List(None, None, None, None, None, None, None, None, None))
     }
     "deindex correctly for partial column" in {
       SudokuNumber.all map {
         partialColumn(_)
-      } must equalTo(
+      } must be_===(
         List(Some(Eight), None, None, Some(Five), Some(Four), None, None, Some(One), Some(Nine)))
     }
 
     "deindex correctly for full column" in {
       SudokuNumber.all map {
         fullColumn(_)
-      } must equalTo(
+      } must be_===(
         List(Some(Eight), Some(Seven), Some(Six), Some(Five), Some(Four), Some(Three), Some(Two), Some(One), Some(Nine)))
     }
 
     "deindex correctly for invalid column" in {
       SudokuNumber.all map {
         invalidColumn(_)
-      } must equalTo(
+      } must be_===(
         List(Some(Eight), None, None, Some(Five), Some(Four), Some(Five), None, Some(One), Some(Nine)))
     }
 
     "have equality test based on immutability" in {
-      emptyColumn must equalTo(Column(None, None, None, None, None, None, None, None, None))
-      partialColumn must equalTo(Column(Some(Eight), None, None, Some(Five), Some(Four), None, None, Some(One), Some(Nine)))
-      fullColumn must equalTo(Column(Some(Eight), Some(Seven), Some(Six), Some(Five), Some(Four), Some(Three), Some(Two), Some(One), Some(Nine)))
-      invalidColumn must equalTo(Column(Some(Eight), None, None, Some(Five), Some(Four), Some(Five), None, Some(One), Some(Nine)))
+      emptyColumn must be_===(Column(None, None, None, None, None, None, None, None, None))
+      partialColumn must be_===(Column(Some(Eight), None, None, Some(Five), Some(Four), None, None, Some(One), Some(Nine)))
+      fullColumn must be_===(Column(Some(Eight), Some(Seven), Some(Six), Some(Five), Some(Four), Some(Three), Some(Two), Some(One), Some(Nine)))
+      invalidColumn must be_===(Column(Some(Eight), None, None, Some(Five), Some(Four), Some(Five), None, Some(One), Some(Nine)))
     }
   }
 }
@@ -186,25 +186,25 @@ object BoardTest extends PlaySpecification {
 
     "Board" should {
     "have apply notation" in {
-      emptyBoard(One, Seven) must equalTo(None)
-      emptyBoard(Three, Three) must equalTo(None)
-      emptyBoard(Eight, Two) must equalTo(None)
+      emptyBoard(One, Seven) must be_===(None)
+      emptyBoard(Three, Three) must be_===(None)
+      emptyBoard(Eight, Two) must be_===(None)
 
-      partialBoard(One, Seven) must equalTo(Some(Three))
-      partialBoard(Three, Three) must equalTo(Some(Seven))
-      partialBoard(Eight, Two) must equalTo(Some(Six))
+      partialBoard(One, Seven) must be_===(Some(Three))
+      partialBoard(Three, Three) must be_===(Some(Seven))
+      partialBoard(Eight, Two) must be_===(Some(Six))
 
-      fullBoard(One, Seven) must equalTo(Some(Three))
-      fullBoard(Three, Three) must equalTo(Some(Nine))
-      fullBoard(Eight, Two) must equalTo(Some(Two))
+      fullBoard(One, Seven) must be_===(Some(Three))
+      fullBoard(Three, Three) must be_===(Some(Nine))
+      fullBoard(Eight, Two) must be_===(Some(Two))
 
-      invalidBoard(One, Seven) must equalTo(Some(Three))
-      invalidBoard(Three, Three) must equalTo(Some(Seven))
-      invalidBoard(Eight, Two) must equalTo(Some(Six))
+      invalidBoard(One, Seven) must be_===(Some(Three))
+      invalidBoard(Three, Three) must be_===(Some(Seven))
+      invalidBoard(Eight, Two) must be_===(Some(Six))
     }
 
     "return rows in empty board" in {
-      SudokuNumber.all map { emptyBoard.row } must equalTo(List(
+      SudokuNumber.all map { emptyBoard.row } must be_===(List(
         Row.empty,
         Row.empty,
         Row.empty,
@@ -219,7 +219,7 @@ object BoardTest extends PlaySpecification {
     }
 
     "return rows in partial board" in {
-      SudokuNumber.all map { partialBoard.row } must equalTo(List(
+      SudokuNumber.all map { partialBoard.row } must be_===(List(
         Row(Some(One), None, None, Some(Two), None, None, Some(Three), None, None),
         Row(None, Some(Four), None, None, Some(Five), None, None, Some(Six), None),
         Row(None, None, Some(Seven), None, None, Some(Eight), None, None, Some(Nine)),
@@ -235,7 +235,7 @@ object BoardTest extends PlaySpecification {
     }
 
     "return rows in full board" in {
-      SudokuNumber.all map { fullBoard.row } must equalTo(List(
+      SudokuNumber.all map { fullBoard.row } must be_===(List(
         Row(Some(One), Some(Two), Some(Three), Some(Four), Some(Five), Some(Six), Some(Seven), Some(Eight), Some(Nine)),
         Row(Some(Four), Some(Five), Some(Six), Some(Seven), Some(Eight), Some(Nine), Some(One), Some(Two), Some(Three)),
         Row(Some(Seven), Some(Eight), Some(Nine), Some(One), Some(Two), Some(Three), Some(Four), Some(Five), Some(Six)),
@@ -251,7 +251,7 @@ object BoardTest extends PlaySpecification {
     }
 
     "return rows in invalid board" in {
-        SudokuNumber.all.map { invalidBoard.row } must equalTo(List(
+        SudokuNumber.all.map { invalidBoard.row } must be_===(List(
           Row(Some(One), Some(One), None, Some(Two), None, None, Some(Three), None, None),
           Row(None, Some(Four), None, None, Some(Five), None, None, Some(Six), None),
           Row(None, None, Some(Seven), None, None, Some(Eight), None, None, Some(Nine)),
@@ -267,7 +267,7 @@ object BoardTest extends PlaySpecification {
     }
 
     "return columns in empty board" in {
-      SudokuNumber.all map { emptyBoard.column } must equalTo(List(
+      SudokuNumber.all map { emptyBoard.column } must be_===(List(
         Column(None, None, None, None, None, None, None, None, None),
         Column(None, None, None, None, None, None, None, None, None),
         Column(None, None, None, None, None, None, None, None, None),
@@ -283,7 +283,7 @@ object BoardTest extends PlaySpecification {
     }
 
     "return columns in partial board" in {
-      SudokuNumber.all map { partialBoard.column } must equalTo(List(
+      SudokuNumber.all map { partialBoard.column } must be_===(List(
         Column(Some(One), None, None, Some(Two), None, None, Some(Three), None, None),
         Column(None, Some(Four), None, None, Some(Five), None, None, Some(Six), None),
         Column(None, None, Some(Seven), None, None, Some(Eight), None, None, Some(Nine)),
@@ -298,7 +298,7 @@ object BoardTest extends PlaySpecification {
     }
 
     "return columns in full board" in {
-      SudokuNumber.all map { fullBoard.column } must equalTo(List(
+      SudokuNumber.all map { fullBoard.column } must be_===(List(
         Column(Some(One), Some(Four), Some(Seven), Some(Two), Some(Five), Some(Eight), Some(Three), Some(Six), Some(Nine)),
         Column(Some(Two), Some(Five), Some(Eight), Some(Three), Some(Six), Some(Nine), Some(Four), Some(Seven), Some(One)),
         Column(Some(Three), Some(Six), Some(Nine), Some(Four), Some(Seven), Some(One), Some(Five), Some(Eight), Some(Two)),
@@ -313,7 +313,7 @@ object BoardTest extends PlaySpecification {
     }
 
     "return columns in invalid board" in {
-      SudokuNumber.all map { invalidBoard.column } must equalTo(List(
+      SudokuNumber.all map { invalidBoard.column } must be_===(List(
         Column(Some(One), None, None, Some(Two), None, None, Some(Three), None, None),
         Column(Some(One), Some(Four), None, None, Some(Five), None, None, Some(Six), None),
         Column(None, None, Some(Seven), None, None, Some(Eight), None, None, Some(Nine)),
@@ -328,7 +328,7 @@ object BoardTest extends PlaySpecification {
     }
 
     "have equality test based on immutability" in {
-      emptyBoard must equalTo(
+      emptyBoard must be_===(
         Board(
           Row.empty,
           Row.empty,
@@ -342,7 +342,7 @@ object BoardTest extends PlaySpecification {
           Row.empty,
           Row.empty))
 
-      partialBoard must equalTo(
+      partialBoard must be_===(
         Board(
           Row(Some(One), None, None, Some(Two), None, None, Some(Three), None, None),
           Row(None, Some(Four), None, None, Some(Five), None, None, Some(Six), None),
@@ -356,7 +356,7 @@ object BoardTest extends PlaySpecification {
           Row(None, Some(Six), None, None, Some(Four), None, None, Some(Five), None),
           Row(None, None, Some(Nine), None, None, Some(Seven), None, None, Some(Eight))))
 
-      fullBoard must equalTo(
+      fullBoard must be_===(
         Board(
           Row(Some(One), Some(Two), Some(Three), Some(Four), Some(Five), Some(Six), Some(Seven), Some(Eight), Some(Nine)),
           Row(Some(Four), Some(Five), Some(Six), Some(Seven), Some(Eight), Some(Nine), Some(One), Some(Two), Some(Three)),
@@ -370,7 +370,7 @@ object BoardTest extends PlaySpecification {
           Row(Some(Six), Some(Seven), Some(Eight), Some(Nine), Some(One), Some(Two), Some(Three), Some(Four), Some(Five)),
           Row(Some(Nine), Some(One), Some(Two), Some(Three), Some(Four), Some(Five), Some(Six), Some(Seven), Some(Eight))))
 
-      invalidBoard must equalTo(
+      invalidBoard must be_===(
         Board(
           Row(Some(One), Some(One), None, Some(Two), None, None, Some(Three), None, None),
           Row(None, Some(Four), None, None, Some(Five), None, None, Some(Six), None),
@@ -387,7 +387,7 @@ object BoardTest extends PlaySpecification {
     }
 
     "toString boards as grids" in {
-      emptyBoard.toString must equalTo(
+      emptyBoard.toString must be_===(
         "" +
           " _ _ _ | _ _ _ | _ _ _ \n" +
           " _ _ _ | _ _ _ | _ _ _ \n" +
@@ -401,7 +401,7 @@ object BoardTest extends PlaySpecification {
           " _ _ _ | _ _ _ | _ _ _ \n" +
           " _ _ _ | _ _ _ | _ _ _ \n")
 
-      partialBoard.toString must equalTo(
+      partialBoard.toString must be_===(
         "" +
           " 1 _ _ | 2 _ _ | 3 _ _ \n" +
           " _ 4 _ | _ 5 _ | _ 6 _ \n" +
@@ -415,7 +415,7 @@ object BoardTest extends PlaySpecification {
           " _ 6 _ | _ 4 _ | _ 5 _ \n" +
           " _ _ 9 | _ _ 7 | _ _ 8 \n")
 
-      fullBoard.toString must equalTo(
+      fullBoard.toString must be_===(
         "" +
           " 1 2 3 | 4 5 6 | 7 8 9 \n" +
           " 4 5 6 | 7 8 9 | 1 2 3 \n" +
@@ -429,7 +429,7 @@ object BoardTest extends PlaySpecification {
           " 6 7 8 | 9 1 2 | 3 4 5 \n" +
           " 9 1 2 | 3 4 5 | 6 7 8 \n")
 
-      invalidBoard.toString must equalTo(
+      invalidBoard.toString must be_===(
         "" +
           " 1 1 _ | 2 _ _ | 3 _ _ \n" +
           " _ 4 _ | _ 5 _ | _ 6 _ \n" +
@@ -444,10 +444,10 @@ object BoardTest extends PlaySpecification {
           " _ _ 9 | _ _ 7 | _ _ 8 \n")
     }
     "construct idstrings from Boards" in {
-      emptyBoard.toIdString must equalTo(emptyIdString)
-      partialBoard.toIdString must equalTo(partialIdString)
-      fullBoard.toIdString must equalTo(fullIdString)
-      invalidBoard.toIdString must equalTo(invalidIdString)
+      emptyBoard.toIdString must be_===(emptyIdString)
+      partialBoard.toIdString must be_===(partialIdString)
+      fullBoard.toIdString must be_===(fullIdString)
+      invalidBoard.toIdString must be_===(invalidIdString)
     }
     "construct boards from grid Strings" in {
       Board(
@@ -462,7 +462,7 @@ object BoardTest extends PlaySpecification {
           "-----------------------\n" +
           " _ _ _ | _ _ _ | _ _ _ \n" +
           " _ _ _ | _ _ _ | _ _ _ \n" +
-          " _ _ _ | _ _ _ | _ _ _ \n") must equalTo(emptyBoard)
+          " _ _ _ | _ _ _ | _ _ _ \n") must be_===(emptyBoard)
 
       Board(
         "" +
@@ -476,7 +476,7 @@ object BoardTest extends PlaySpecification {
           "-----------------------\n" +
           " 3 _ _ | 1 _ _ | 2 _ _ \n" +
           " _ 6 _ | _ 4 _ | _ 5 _ \n" +
-          " _ _ 9 | _ _ 7 | _ _ 8 \n") must equalTo(partialBoard)
+          " _ _ 9 | _ _ 7 | _ _ 8 \n") must be_===(partialBoard)
 
       Board(
         "" +
@@ -490,7 +490,7 @@ object BoardTest extends PlaySpecification {
           "-----------------------\n" +
           " 3 4 5 | 6 7 8 | 9 1 2 \n" +
           " 6 7 8 | 9 1 2 | 3 4 5 \n" +
-          " 9 1 2 | 3 4 5 | 6 7 8 \n") must equalTo(fullBoard)
+          " 9 1 2 | 3 4 5 | 6 7 8 \n") must be_===(fullBoard)
 
       Board(
         "" +
@@ -504,19 +504,19 @@ object BoardTest extends PlaySpecification {
           "-----------------------\n" +
           " 3 _ _ | 1 _ _ | 2 _ _ \n" +
           " _ 6 _ | _ 4 _ | _ 5 _ \n" +
-          " _ _ 9 | _ _ 7 | _ _ 8 \n") must equalTo(invalidBoard)
+          " _ _ 9 | _ _ 7 | _ _ 8 \n") must be_===(invalidBoard)
     }
     "construct boards from idStrings" in {
-      Board(emptyIdString, true) must equalTo(emptyBoard)
-      Board(partialIdString, true) must equalTo(partialBoard)
-      Board(fullIdString, true) must equalTo(fullBoard)
-      Board(invalidIdString, true) must equalTo(invalidBoard)
+      Board(emptyIdString, id = true) must be_===(emptyBoard)
+      Board(partialIdString, id = true) must be_===(partialBoard)
+      Board(fullIdString, id = true) must be_===(fullBoard)
+      Board(invalidIdString, id = true) must be_===(invalidBoard)
     }
      "construct md5 from idStrings)" in {
-       emptyBoard.md5 must equalTo(md5Hex(emptyIdString))
-       partialBoard.md5 must equalTo(md5Hex(partialIdString))
-       fullBoard.md5 must equalTo(md5Hex(fullIdString))
-       invalidBoard.md5 must equalTo(md5Hex(invalidIdString))
+       emptyBoard.md5 must be_===(md5Hex(emptyIdString))
+       partialBoard.md5 must be_===(md5Hex(partialIdString))
+       fullBoard.md5 must be_===(md5Hex(fullIdString))
+       invalidBoard.md5 must be_===(md5Hex(invalidIdString))
      }
   }
 }

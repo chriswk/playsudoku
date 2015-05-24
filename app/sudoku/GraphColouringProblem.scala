@@ -9,9 +9,9 @@ case class Node(label: (SudokuNumber, SudokuNumber), candidates: Set[SudokuNumbe
       (this.label._2.representative - 1) / 3 == (that.label._2.representative - 1) / 3
   }
 
-  def neighbours(that: Node) = neighbours(that.label)
-  def neighbours(label: (SudokuNumber, SudokuNumber)) = neighbours(label._1, label._2)
-  def neighbours(column: SudokuNumber, row: SudokuNumber) = {
+  def neighbours(that: Node): Boolean = neighbours(that.label)
+  def neighbours(label: (SudokuNumber, SudokuNumber)): Boolean = neighbours(label._1, label._2)
+  def neighbours(column: SudokuNumber, row: SudokuNumber): Boolean = {
     !(this.label._1 == column && this.label._2 == row) &&
       (this.label._1 == column || this.label._2 == row || (
         (this.label._1.representative - 1) / 3 == (column.representative - 1) / 3 &&
@@ -29,7 +29,6 @@ object Node {
 }
 
 case class Graph(nodes: Set[Node]) {
-  type Label = (SudokuNumber, SudokuNumber)
 
   private lazy val nodeLookup = nodes.toArray sortBy {
     _.index
@@ -105,7 +104,7 @@ object GraphColouringProblem {
   
   lazy val unconstrained = new GraphColouringProblem {
     protected val graph = {
-      val labels: Set[(SudokuNumber, SudokuNumber)] = (SudokuNumber.set cross SudokuNumber.set)
+      val labels: Set[(SudokuNumber, SudokuNumber)] = SudokuNumber.set cross SudokuNumber.set
       val nodes = labels map {
         label => Node(label, SudokuNumber.set)
       }

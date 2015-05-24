@@ -1,0 +1,768 @@
+
+.btop {
+    border-top: 3px solid black;
+}
+.bbot {
+    border-bottom: 3px solid black;
+}
+.bleft {
+    border-left: 3px solid black;
+}
+.bright {
+    border-right: 3px solid black;
+}
+.sudoku {
+    font-size: 24px;
+    height: 500px;
+    text-align: center;
+    width: 550px;
+}
+h3 {
+    margin: 20px 0;
+}
+input {
+    border: 1px solid black;
+    border-radius: 0;
+    display: inline;
+    float: left;
+    font-size: 24px;
+    height: 45px;
+    margin: 0;
+    text-align: center;
+    width: 45px;
+}
+input:disabled {
+    border-color: black;
+}
+[value="1"], [value="2"], [value="3"], [value="4"], [value="5"], [value="6"], [value="7"], [value="8"], [value="9"] {
+    color: green;
+}
+input.r1[value="1"] ~ input.r1[value="1"] {
+    color: red;
+}
+input.c1[value="1"] ~ input.c1[value="1"] {
+    color: red;
+}
+input.t1[value="1"] ~ input.t1[value="1"] {
+    color: red;
+}
+input.r1[value="2"] ~ input.r1[value="2"] {
+    color: red;
+}
+input.c1[value="2"] ~ input.c1[value="2"] {
+    color: red;
+}
+input.t1[value="2"] ~ input.t1[value="2"] {
+    color: red;
+}
+input.r1[value="3"] ~ input.r1[value="3"] {
+    color: red;
+}
+input.c1[value="3"] ~ input.c1[value="3"] {
+    color: red;
+}
+input.t1[value="3"] ~ input.t1[value="3"] {
+    color: red;
+}
+input.r1[value="4"] ~ input.r1[value="4"] {
+    color: red;
+}
+input.c1[value="4"] ~ input.c1[value="4"] {
+    color: red;
+}
+input.t1[value="4"] ~ input.t1[value="4"] {
+    color: red;
+}
+input.r1[value="5"] ~ input.r1[value="5"] {
+    color: red;
+}
+input.c1[value="5"] ~ input.c1[value="5"] {
+    color: red;
+}
+input.t1[value="5"] ~ input.t1[value="5"] {
+    color: red;
+}
+input.r1[value="6"] ~ input.r1[value="6"] {
+    color: red;
+}
+input.c1[value="6"] ~ input.c1[value="6"] {
+    color: red;
+}
+input.t1[value="6"] ~ input.t1[value="6"] {
+    color: red;
+}
+input.r1[value="7"] ~ input.r1[value="7"] {
+    color: red;
+}
+input.c1[value="7"] ~ input.c1[value="7"] {
+    color: red;
+}
+input.t1[value="7"] ~ input.t1[value="7"] {
+    color: red;
+}
+input.r1[value="8"] ~ input.r1[value="8"] {
+    color: red;
+}
+input.c1[value="8"] ~ input.c1[value="8"] {
+    color: red;
+}
+input.t1[value="8"] ~ input.t1[value="8"] {
+    color: red;
+}
+input.r1[value="9"] ~ input.r1[value="9"] {
+    color: red;
+}
+input.c1[value="9"] ~ input.c1[value="9"] {
+    color: red;
+}
+input.t1[value="9"] ~ input.t1[value="9"] {
+    color: red;
+}
+input.r2[value="1"] ~ input.r2[value="1"] {
+    color: red;
+}
+input.c2[value="1"] ~ input.c2[value="1"] {
+    color: red;
+}
+input.t2[value="1"] ~ input.t2[value="1"] {
+    color: red;
+}
+input.r2[value="2"] ~ input.r2[value="2"] {
+    color: red;
+}
+input.c2[value="2"] ~ input.c2[value="2"] {
+    color: red;
+}
+input.t2[value="2"] ~ input.t2[value="2"] {
+    color: red;
+}
+input.r2[value="3"] ~ input.r2[value="3"] {
+    color: red;
+}
+input.c2[value="3"] ~ input.c2[value="3"] {
+    color: red;
+}
+input.t2[value="3"] ~ input.t2[value="3"] {
+    color: red;
+}
+input.r2[value="4"] ~ input.r2[value="4"] {
+    color: red;
+}
+input.c2[value="4"] ~ input.c2[value="4"] {
+    color: red;
+}
+input.t2[value="4"] ~ input.t2[value="4"] {
+    color: red;
+}
+input.r2[value="5"] ~ input.r2[value="5"] {
+    color: red;
+}
+input.c2[value="5"] ~ input.c2[value="5"] {
+    color: red;
+}
+input.t2[value="5"] ~ input.t2[value="5"] {
+    color: red;
+}
+input.r2[value="6"] ~ input.r2[value="6"] {
+    color: red;
+}
+input.c2[value="6"] ~ input.c2[value="6"] {
+    color: red;
+}
+input.t2[value="6"] ~ input.t2[value="6"] {
+    color: red;
+}
+input.r2[value="7"] ~ input.r2[value="7"] {
+    color: red;
+}
+input.c2[value="7"] ~ input.c2[value="7"] {
+    color: red;
+}
+input.t2[value="7"] ~ input.t2[value="7"] {
+    color: red;
+}
+input.r2[value="8"] ~ input.r2[value="8"] {
+    color: red;
+}
+input.c2[value="8"] ~ input.c2[value="8"] {
+    color: red;
+}
+input.t2[value="8"] ~ input.t2[value="8"] {
+    color: red;
+}
+input.r2[value="9"] ~ input.r2[value="9"] {
+    color: red;
+}
+input.c2[value="9"] ~ input.c2[value="9"] {
+    color: red;
+}
+input.t2[value="9"] ~ input.t2[value="9"] {
+    color: red;
+}
+input.r3[value="1"] ~ input.r3[value="1"] {
+    color: red;
+}
+input.c3[value="1"] ~ input.c3[value="1"] {
+    color: red;
+}
+input.t3[value="1"] ~ input.t3[value="1"] {
+    color: red;
+}
+input.r3[value="2"] ~ input.r3[value="2"] {
+    color: red;
+}
+input.c3[value="2"] ~ input.c3[value="2"] {
+    color: red;
+}
+input.t3[value="2"] ~ input.t3[value="2"] {
+    color: red;
+}
+input.r3[value="3"] ~ input.r3[value="3"] {
+    color: red;
+}
+input.c3[value="3"] ~ input.c3[value="3"] {
+    color: red;
+}
+input.t3[value="3"] ~ input.t3[value="3"] {
+    color: red;
+}
+input.r3[value="4"] ~ input.r3[value="4"] {
+    color: red;
+}
+input.c3[value="4"] ~ input.c3[value="4"] {
+    color: red;
+}
+input.t3[value="4"] ~ input.t3[value="4"] {
+    color: red;
+}
+input.r3[value="5"] ~ input.r3[value="5"] {
+    color: red;
+}
+input.c3[value="5"] ~ input.c3[value="5"] {
+    color: red;
+}
+input.t3[value="5"] ~ input.t3[value="5"] {
+    color: red;
+}
+input.r3[value="6"] ~ input.r3[value="6"] {
+    color: red;
+}
+input.c3[value="6"] ~ input.c3[value="6"] {
+    color: red;
+}
+input.t3[value="6"] ~ input.t3[value="6"] {
+    color: red;
+}
+input.r3[value="7"] ~ input.r3[value="7"] {
+    color: red;
+}
+input.c3[value="7"] ~ input.c3[value="7"] {
+    color: red;
+}
+input.t3[value="7"] ~ input.t3[value="7"] {
+    color: red;
+}
+input.r3[value="8"] ~ input.r3[value="8"] {
+    color: red;
+}
+input.c3[value="8"] ~ input.c3[value="8"] {
+    color: red;
+}
+input.t3[value="8"] ~ input.t3[value="8"] {
+    color: red;
+}
+input.r3[value="9"] ~ input.r3[value="9"] {
+    color: red;
+}
+input.c3[value="9"] ~ input.c3[value="9"] {
+    color: red;
+}
+input.t3[value="9"] ~ input.t3[value="9"] {
+    color: red;
+}
+input.r4[value="1"] ~ input.r4[value="1"] {
+    color: red;
+}
+input.c4[value="1"] ~ input.c4[value="1"] {
+    color: red;
+}
+input.t4[value="1"] ~ input.t4[value="1"] {
+    color: red;
+}
+input.r4[value="2"] ~ input.r4[value="2"] {
+    color: red;
+}
+input.c4[value="2"] ~ input.c4[value="2"] {
+    color: red;
+}
+input.t4[value="2"] ~ input.t4[value="2"] {
+    color: red;
+}
+input.r4[value="3"] ~ input.r4[value="3"] {
+    color: red;
+}
+input.c4[value="3"] ~ input.c4[value="3"] {
+    color: red;
+}
+input.t4[value="3"] ~ input.t4[value="3"] {
+    color: red;
+}
+input.r4[value="4"] ~ input.r4[value="4"] {
+    color: red;
+}
+input.c4[value="4"] ~ input.c4[value="4"] {
+    color: red;
+}
+input.t4[value="4"] ~ input.t4[value="4"] {
+    color: red;
+}
+input.r4[value="5"] ~ input.r4[value="5"] {
+    color: red;
+}
+input.c4[value="5"] ~ input.c4[value="5"] {
+    color: red;
+}
+input.t4[value="5"] ~ input.t4[value="5"] {
+    color: red;
+}
+input.r4[value="6"] ~ input.r4[value="6"] {
+    color: red;
+}
+input.c4[value="6"] ~ input.c4[value="6"] {
+    color: red;
+}
+input.t4[value="6"] ~ input.t4[value="6"] {
+    color: red;
+}
+input.r4[value="7"] ~ input.r4[value="7"] {
+    color: red;
+}
+input.c4[value="7"] ~ input.c4[value="7"] {
+    color: red;
+}
+input.t4[value="7"] ~ input.t4[value="7"] {
+    color: red;
+}
+input.r4[value="8"] ~ input.r4[value="8"] {
+    color: red;
+}
+input.c4[value="8"] ~ input.c4[value="8"] {
+    color: red;
+}
+input.t4[value="8"] ~ input.t4[value="8"] {
+    color: red;
+}
+input.r4[value="9"] ~ input.r4[value="9"] {
+    color: red;
+}
+input.c4[value="9"] ~ input.c4[value="9"] {
+    color: red;
+}
+input.t4[value="9"] ~ input.t4[value="9"] {
+    color: red;
+}
+input.r5[value="1"] ~ input.r5[value="1"] {
+    color: red;
+}
+input.c5[value="1"] ~ input.c5[value="1"] {
+    color: red;
+}
+input.t5[value="1"] ~ input.t5[value="1"] {
+    color: red;
+}
+input.r5[value="2"] ~ input.r5[value="2"] {
+    color: red;
+}
+input.c5[value="2"] ~ input.c5[value="2"] {
+    color: red;
+}
+input.t5[value="2"] ~ input.t5[value="2"] {
+    color: red;
+}
+input.r5[value="3"] ~ input.r5[value="3"] {
+    color: red;
+}
+input.c5[value="3"] ~ input.c5[value="3"] {
+    color: red;
+}
+input.t5[value="3"] ~ input.t5[value="3"] {
+    color: red;
+}
+input.r5[value="4"] ~ input.r5[value="4"] {
+    color: red;
+}
+input.c5[value="4"] ~ input.c5[value="4"] {
+    color: red;
+}
+input.t5[value="4"] ~ input.t5[value="4"] {
+    color: red;
+}
+input.r5[value="5"] ~ input.r5[value="5"] {
+    color: red;
+}
+input.c5[value="5"] ~ input.c5[value="5"] {
+    color: red;
+}
+input.t5[value="5"] ~ input.t5[value="5"] {
+    color: red;
+}
+input.r5[value="6"] ~ input.r5[value="6"] {
+    color: red;
+}
+input.c5[value="6"] ~ input.c5[value="6"] {
+    color: red;
+}
+input.t5[value="6"] ~ input.t5[value="6"] {
+    color: red;
+}
+input.r5[value="7"] ~ input.r5[value="7"] {
+    color: red;
+}
+input.c5[value="7"] ~ input.c5[value="7"] {
+    color: red;
+}
+input.t5[value="7"] ~ input.t5[value="7"] {
+    color: red;
+}
+input.r5[value="8"] ~ input.r5[value="8"] {
+    color: red;
+}
+input.c5[value="8"] ~ input.c5[value="8"] {
+    color: red;
+}
+input.t5[value="8"] ~ input.t5[value="8"] {
+    color: red;
+}
+input.r5[value="9"] ~ input.r5[value="9"] {
+    color: red;
+}
+input.c5[value="9"] ~ input.c5[value="9"] {
+    color: red;
+}
+input.t5[value="9"] ~ input.t5[value="9"] {
+    color: red;
+}
+input.r6[value="1"] ~ input.r6[value="1"] {
+    color: red;
+}
+input.c6[value="1"] ~ input.c6[value="1"] {
+    color: red;
+}
+input.t6[value="1"] ~ input.t6[value="1"] {
+    color: red;
+}
+input.r6[value="2"] ~ input.r6[value="2"] {
+    color: red;
+}
+input.c6[value="2"] ~ input.c6[value="2"] {
+    color: red;
+}
+input.t6[value="2"] ~ input.t6[value="2"] {
+    color: red;
+}
+input.r6[value="3"] ~ input.r6[value="3"] {
+    color: red;
+}
+input.c6[value="3"] ~ input.c6[value="3"] {
+    color: red;
+}
+input.t6[value="3"] ~ input.t6[value="3"] {
+    color: red;
+}
+input.r6[value="4"] ~ input.r6[value="4"] {
+    color: red;
+}
+input.c6[value="4"] ~ input.c6[value="4"] {
+    color: red;
+}
+input.t6[value="4"] ~ input.t6[value="4"] {
+    color: red;
+}
+input.r6[value="5"] ~ input.r6[value="5"] {
+    color: red;
+}
+input.c6[value="5"] ~ input.c6[value="5"] {
+    color: red;
+}
+input.t6[value="5"] ~ input.t6[value="5"] {
+    color: red;
+}
+input.r6[value="6"] ~ input.r6[value="6"] {
+    color: red;
+}
+input.c6[value="6"] ~ input.c6[value="6"] {
+    color: red;
+}
+input.t6[value="6"] ~ input.t6[value="6"] {
+    color: red;
+}
+input.r6[value="7"] ~ input.r6[value="7"] {
+    color: red;
+}
+input.c6[value="7"] ~ input.c6[value="7"] {
+    color: red;
+}
+input.t6[value="7"] ~ input.t6[value="7"] {
+    color: red;
+}
+input.r6[value="8"] ~ input.r6[value="8"] {
+    color: red;
+}
+input.c6[value="8"] ~ input.c6[value="8"] {
+    color: red;
+}
+input.t6[value="8"] ~ input.t6[value="8"] {
+    color: red;
+}
+input.r6[value="9"] ~ input.r6[value="9"] {
+    color: red;
+}
+input.c6[value="9"] ~ input.c6[value="9"] {
+    color: red;
+}
+input.t6[value="9"] ~ input.t6[value="9"] {
+    color: red;
+}
+input.r7[value="1"] ~ input.r7[value="1"] {
+    color: red;
+}
+input.c7[value="1"] ~ input.c7[value="1"] {
+    color: red;
+}
+input.t7[value="1"] ~ input.t7[value="1"] {
+    color: red;
+}
+input.r7[value="2"] ~ input.r7[value="2"] {
+    color: red;
+}
+input.c7[value="2"] ~ input.c7[value="2"] {
+    color: red;
+}
+input.t7[value="2"] ~ input.t7[value="2"] {
+    color: red;
+}
+input.r7[value="3"] ~ input.r7[value="3"] {
+    color: red;
+}
+input.c7[value="3"] ~ input.c7[value="3"] {
+    color: red;
+}
+input.t7[value="3"] ~ input.t7[value="3"] {
+    color: red;
+}
+input.r7[value="4"] ~ input.r7[value="4"] {
+    color: red;
+}
+input.c7[value="4"] ~ input.c7[value="4"] {
+    color: red;
+}
+input.t7[value="4"] ~ input.t7[value="4"] {
+    color: red;
+}
+input.r7[value="5"] ~ input.r7[value="5"] {
+    color: red;
+}
+input.c7[value="5"] ~ input.c7[value="5"] {
+    color: red;
+}
+input.t7[value="5"] ~ input.t7[value="5"] {
+    color: red;
+}
+input.r7[value="6"] ~ input.r7[value="6"] {
+    color: red;
+}
+input.c7[value="6"] ~ input.c7[value="6"] {
+    color: red;
+}
+input.t7[value="6"] ~ input.t7[value="6"] {
+    color: red;
+}
+input.r7[value="7"] ~ input.r7[value="7"] {
+    color: red;
+}
+input.c7[value="7"] ~ input.c7[value="7"] {
+    color: red;
+}
+input.t7[value="7"] ~ input.t7[value="7"] {
+    color: red;
+}
+input.r7[value="8"] ~ input.r7[value="8"] {
+    color: red;
+}
+input.c7[value="8"] ~ input.c7[value="8"] {
+    color: red;
+}
+input.t7[value="8"] ~ input.t7[value="8"] {
+    color: red;
+}
+input.r7[value="9"] ~ input.r7[value="9"] {
+    color: red;
+}
+input.c7[value="9"] ~ input.c7[value="9"] {
+    color: red;
+}
+input.t7[value="9"] ~ input.t7[value="9"] {
+    color: red;
+}
+input.r8[value="1"] ~ input.r8[value="1"] {
+    color: red;
+}
+input.c8[value="1"] ~ input.c8[value="1"] {
+    color: red;
+}
+input.t8[value="1"] ~ input.t8[value="1"] {
+    color: red;
+}
+input.r8[value="2"] ~ input.r8[value="2"] {
+    color: red;
+}
+input.c8[value="2"] ~ input.c8[value="2"] {
+    color: red;
+}
+input.t8[value="2"] ~ input.t8[value="2"] {
+    color: red;
+}
+input.r8[value="3"] ~ input.r8[value="3"] {
+    color: red;
+}
+input.c8[value="3"] ~ input.c8[value="3"] {
+    color: red;
+}
+input.t8[value="3"] ~ input.t8[value="3"] {
+    color: red;
+}
+input.r8[value="4"] ~ input.r8[value="4"] {
+    color: red;
+}
+input.c8[value="4"] ~ input.c8[value="4"] {
+    color: red;
+}
+input.t8[value="4"] ~ input.t8[value="4"] {
+    color: red;
+}
+input.r8[value="5"] ~ input.r8[value="5"] {
+    color: red;
+}
+input.c8[value="5"] ~ input.c8[value="5"] {
+    color: red;
+}
+input.t8[value="5"] ~ input.t8[value="5"] {
+    color: red;
+}
+input.r8[value="6"] ~ input.r8[value="6"] {
+    color: red;
+}
+input.c8[value="6"] ~ input.c8[value="6"] {
+    color: red;
+}
+input.t8[value="6"] ~ input.t8[value="6"] {
+    color: red;
+}
+input.r8[value="7"] ~ input.r8[value="7"] {
+    color: red;
+}
+input.c8[value="7"] ~ input.c8[value="7"] {
+    color: red;
+}
+input.t8[value="7"] ~ input.t8[value="7"] {
+    color: red;
+}
+input.r8[value="8"] ~ input.r8[value="8"] {
+    color: red;
+}
+input.c8[value="8"] ~ input.c8[value="8"] {
+    color: red;
+}
+input.t8[value="8"] ~ input.t8[value="8"] {
+    color: red;
+}
+input.r8[value="9"] ~ input.r8[value="9"] {
+    color: red;
+}
+input.c8[value="9"] ~ input.c8[value="9"] {
+    color: red;
+}
+input.t8[value="9"] ~ input.t8[value="9"] {
+    color: red;
+}
+input.r9[value="1"] ~ input.r9[value="1"] {
+    color: red;
+}
+input.c9[value="1"] ~ input.c9[value="1"] {
+    color: red;
+}
+input.t9[value="1"] ~ input.t9[value="1"] {
+    color: red;
+}
+input.r9[value="2"] ~ input.r9[value="2"] {
+    color: red;
+}
+input.c9[value="2"] ~ input.c9[value="2"] {
+    color: red;
+}
+input.t9[value="2"] ~ input.t9[value="2"] {
+    color: red;
+}
+input.r9[value="3"] ~ input.r9[value="3"] {
+    color: red;
+}
+input.c9[value="3"] ~ input.c9[value="3"] {
+    color: red;
+}
+input.t9[value="3"] ~ input.t9[value="3"] {
+    color: red;
+}
+input.r9[value="4"] ~ input.r9[value="4"] {
+    color: red;
+}
+input.c9[value="4"] ~ input.c9[value="4"] {
+    color: red;
+}
+input.t9[value="4"] ~ input.t9[value="4"] {
+    color: red;
+}
+input.r9[value="5"] ~ input.r9[value="5"] {
+    color: red;
+}
+input.c9[value="5"] ~ input.c9[value="5"] {
+    color: red;
+}
+input.t9[value="5"] ~ input.t9[value="5"] {
+    color: red;
+}
+input.r9[value="6"] ~ input.r9[value="6"] {
+    color: red;
+}
+input.c9[value="6"] ~ input.c9[value="6"] {
+    color: red;
+}
+input.t9[value="6"] ~ input.t9[value="6"] {
+    color: red;
+}
+input.r9[value="7"] ~ input.r9[value="7"] {
+    color: red;
+}
+input.c9[value="7"] ~ input.c9[value="7"] {
+    color: red;
+}
+input.t9[value="7"] ~ input.t9[value="7"] {
+    color: red;
+}
+input.r9[value="8"] ~ input.r9[value="8"] {
+    color: red;
+}
+input.c9[value="8"] ~ input.c9[value="8"] {
+    color: red;
+}
+input.t9[value="8"] ~ input.t9[value="8"] {
+    color: red;
+}
+input.r9[value="9"] ~ input.r9[value="9"] {
+    color: red;
+}
+input.c9[value="9"] ~ input.c9[value="9"] {
+    color: red;
+}
+input.t9[value="9"] ~ input.t9[value="9"] {
+    color: red;
+}

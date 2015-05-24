@@ -6,6 +6,6 @@ function updateValue(e) {
 }
 
 for (var i = 0, el = document.getElementsByClassName("sudoku"), len = el.length; i < len; i++){
-el[i].addEventListener("change", updateValue, false);
-el[i].addEventListener("keyup", updateValue, false);
+    el[i].addEventListener("change", updateValue, false);
+    el[i].addEventListener("keyup", updateValue, false);
 }

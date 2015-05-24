@@ -8,9 +8,6 @@ scalaVersion := "2.11.6"
 
 herokuAppName in Compile := "playsudoku"
 
-resolvers += "rubygems-release" at "http://rubygems-proxy.torquebox.org/releases"
-
-
 libraryDependencies ++= Seq(
   jdbc,
   anorm,
@@ -19,6 +16,8 @@ libraryDependencies ++= Seq(
   "org.webjars" %% "webjars-play" % "2.3.0-2",
   "org.webjars" % "bootstrap" % "3.3.4"
 )
+
+resolvers += "rubygems-release" at "http://rubygems-proxy.torquebox.org/releases"
 
 libraryDependencies ++= Seq(
   "rubygems" % "travis" % "1.7.1" excludeAll(ExclusionRule("rubygems", "pry", "*"), ExclusionRule("rubygems", "ffi", "*")),

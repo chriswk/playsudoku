@@ -512,7 +512,7 @@ object BoardTest extends PlaySpecification {
       Board(fullIdString, id = true) must be_===(fullBoard)
       Board(invalidIdString, id = true) must be_===(invalidBoard)
     }
-     "construct md5 from idStrings)" in {
+     "construct md5 from idStrings" in {
        emptyBoard.md5 must be_===(md5Hex(emptyIdString))
        partialBoard.md5 must be_===(md5Hex(partialIdString))
        fullBoard.md5 must be_===(md5Hex(fullIdString))

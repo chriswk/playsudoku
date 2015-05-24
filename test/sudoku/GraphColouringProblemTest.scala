@@ -2,7 +2,7 @@ package sudoku
 
 import play.api.test.PlaySpecification
 
-class GraphColouringProblemTest extends PlaySpecification with TestBoards {
+object GraphColouringProblemTest extends PlaySpecification with TestBoards {
   val emptyBoard = Board(
     Row.empty, Row.empty, Row.empty,
     Row.empty, Row.empty, Row.empty,

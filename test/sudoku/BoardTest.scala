@@ -178,8 +178,13 @@ object BoardTest extends PlaySpecification {
     // _ _ 9 | _ _ 7 | _ _ 8
     partialBoard.copy(first = partialBoard.first.copy(second = Some(One)))
   }
+  val emptyIdString = List.fill(81)("_").mkString("")
+  val partialIdString = "1__2__3___4__5__6___7__8__92__3__1___5__6__4___8__9__73__1__2___6__4__5___9__7__8"
+  val fullIdString = "123456789456789123789123456234567891567891234891234567345678912678912345912345678"
+  val invalidIdString = "11_2__3___4__5__6___7__8__92__3__1___5__6__4___8__9__73__1__2___6__4__5___9__7__8"
 
-  "Board" should {
+
+    "Board" should {
     "have apply notation" in {
       emptyBoard(One, Seven) must equalTo(None)
       emptyBoard(Three, Three) must equalTo(None)
@@ -438,7 +443,12 @@ object BoardTest extends PlaySpecification {
           " _ 6 _ | _ 4 _ | _ 5 _ \n" +
           " _ _ 9 | _ _ 7 | _ _ 8 \n")
     }
-
+    "construct idstrings from Boards" in {
+      emptyBoard.toIdString must equalTo(emptyIdString)
+      partialBoard.toIdString must equalTo(partialIdString)
+      fullBoard.toIdString must equalTo(fullIdString)
+      invalidBoard.toIdString must equalTo(invalidIdString)
+    }
     "construct boards from grid Strings" in {
       Board(
         "" +
@@ -496,5 +506,17 @@ object BoardTest extends PlaySpecification {
           " _ 6 _ | _ 4 _ | _ 5 _ \n" +
           " _ _ 9 | _ _ 7 | _ _ 8 \n") must equalTo(invalidBoard)
     }
+    "construct boards from idStrings" in {
+      Board(emptyIdString, true) must equalTo(emptyBoard)
+      Board(partialIdString, true) must equalTo(partialBoard)
+      Board(fullIdString, true) must equalTo(fullBoard)
+      Board(invalidIdString, true) must equalTo(invalidBoard)
+    }
+     "construct md5 from idStrings)" in {
+       emptyBoard.md5 must equalTo(md5Hex(emptyIdString))
+       partialBoard.md5 must equalTo(md5Hex(partialIdString))
+       fullBoard.md5 must equalTo(md5Hex(fullIdString))
+       invalidBoard.md5 must equalTo(md5Hex(invalidIdString))
+     }
   }
 }

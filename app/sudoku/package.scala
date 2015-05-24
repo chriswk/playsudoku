@@ -1,3 +1,6 @@
+import java.nio.charset.Charset
+import java.security.MessageDigest
+
 import scala.util.Random
 package object sudoku {
   type Label = (SudokuNumber, SudokuNumber)
@@ -24,6 +27,10 @@ package object sudoku {
     }
 
     current
+  }
+
+  def md5Hex(s: String) = {
+    MessageDigest.getInstance("md5").digest(s.getBytes("UTF-8")).map("%02X".format(_)).mkString
   }
 
   implicit def list2Rotate[A](l: List[A]) = new {

@@ -50,11 +50,12 @@ case class Board(
 
   def row(i: SudokuNumber) = rows(i.representative - 1)
   def column(j: SudokuNumber) = columns(j.representative - 1)
-
+  def md5 = md5Hex(toIdString)
   lazy val toGraphColouringProblem: GraphColouringProblem = GraphColouringProblem(this)
 
+  def element(value: Option[SudokuNumber]): String = value map { _.representative.toString } getOrElse "_"
+
   override def toString = {
-    def element(value: Option[SudokuNumber]): String = value map { _.representative.toString } getOrElse "_"
     val rowStrings = rows map { row =>
       List(
       element(row.first), element(row.second), element(row.third),
@@ -75,6 +76,10 @@ case class Board(
 
     allRows.mkString("", "\n", "\n")
   }
+
+  def toIdString = {
+    toString.replaceAll("[^0-9_]", "")
+  }
 }
 
 object Board {
@@ -86,6 +91,23 @@ object Board {
     val trimmed = lines map { _.replaceAll("[^0-9_]", "") } filter { _ != "" }
 
     val rows = trimmed map { line =>
+      val Line(first, second, third, fourth, fifth, sixth, seventh, eighth, ninth) = line
+      Row(
+        toElement(first), toElement(second), toElement(third),
+        toElement(fourth), toElement(fifth), toElement(sixth),
+        toElement(seventh), toElement(eighth), toElement(ninth)
+      )
+    }
+
+    Board(
+      rows(0), rows(1), rows(2),
+      rows(3), rows(4), rows(5),
+      rows(6), rows(7), rows(8)
+    )
+  }
+  def apply(board:String, id: Boolean): Board = {
+    val lines = board.grouped(9).toList
+    val rows = lines map { line =>
       val Line(first, second, third, fourth, fifth, sixth, seventh, eighth, ninth) = line
       Row(
         toElement(first), toElement(second), toElement(third),

@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String)(content: Html)(jsFooter: Html)
 
 <!DOCTYPE html>
 
@@ -26,7 +26,10 @@
                 </div>
             </div>
         </nav>
+
         @content
+        <script type="text/javascript" src="@routes.Assets.at("lib/jquery/jquery.min.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/updateBoardStatus.js")"></script>
+        @jsFooter
     </body>
 </html>

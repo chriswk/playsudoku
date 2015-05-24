@@ -14,14 +14,7 @@ libraryDependencies ++= Seq(
   cache,
   ws,
   "org.webjars" %% "webjars-play" % "2.3.0-2",
-  "org.webjars" % "bootstrap" % "3.3.4"
+  "org.webjars" % "bootstrap" % "3.3.4",
+  "org.webjars" % "jquery" % "2.1.4",
+  "com.sksamuel.elastic4s" %% "elastic4s" % "1.5.10"
 )
-
-resolvers += "rubygems-release" at "http://rubygems-proxy.torquebox.org/releases"
-
-libraryDependencies ++= Seq(
-  "rubygems" % "travis" % "1.7.1" excludeAll(ExclusionRule("rubygems", "pry", "*"), ExclusionRule("rubygems", "ffi", "*")),
-  "rubygems" % "pry" % "0.9.12.6",
-  "rubygems" % "ffi" % "1.9.3"
-)
-

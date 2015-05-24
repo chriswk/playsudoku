@@ -1,13 +1,18 @@
 package controllers
+
+import actors.BoardGeneratorActor
+import akka.actor.Props
+import play.api.libs.concurrent.Akka
 import sudoku._
 import sudoku.Generator
 import play.api._
 import play.api.mvc._
+import play.api.Play.current
 
 import scala.util.Random
 
 object Sudoku extends Controller {
-
+  val boardGen = Akka.system.actorOf(Props[BoardGeneratorActor], name = "boards")
   val board = Action {
     Ok(views.html.board())
   }
@@ -43,5 +48,13 @@ object Sudoku extends Controller {
       case Some(p) => Ok(p.toBoard.toIdString)
       case None => NoContent
     }
+  }
+
+  def indexBoards(boardCount: Option[Int]) = Action {
+    boardCount match {
+      case Some(c) => boardGen ! actors.GenerateBoards(c)
+      case None => boardGen ! actors.GenerateBoards(10)
+    }
+    Ok
   }
 }

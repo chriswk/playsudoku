@@ -24,8 +24,8 @@ case class Node(label: (SudokuNumber, SudokuNumber), candidates: Set[SudokuNumbe
 }
 
 object Node {
-  def index(label: (SudokuNumber, SudokuNumber)) = index(label._1, label._2)
-  def index(column: SudokuNumber, row: SudokuNumber) = column.representative + (row.representative -1) * 9 -1
+  def index(label: (SudokuNumber, SudokuNumber)): Int = index(label._1, label._2)
+  def index(column: SudokuNumber, row: SudokuNumber): Int = column.representative + (row.representative -1) * 9 -1
 }
 
 case class Graph(nodes: Set[Node]) {
@@ -33,8 +33,8 @@ case class Graph(nodes: Set[Node]) {
   private lazy val nodeLookup = nodes.toArray sortBy {
     _.index
   }
-  def apply(column: SudokuNumber, row: SudokuNumber) = apply((column, row))
-  def apply(label: Label) = nodeLookup(Node index label)
+  def apply(column: SudokuNumber, row: SudokuNumber): Node = apply((column, row))
+  def apply(label: Label): Node = nodeLookup(Node index label)
 
   def replace(node: Node, replacement: Node): Graph = Graph(nodes - node + replacement)
   def rowOf(label: Label): Set[Node] = rowOf(apply(label))
@@ -57,9 +57,9 @@ case class Graph(nodes: Set[Node]) {
   def zoneOf(column: SudokuNumber, row: SudokuNumber):Set[Node] = zoneOf(apply(column, row))
   def zoneOf(node: Node):Set[Node] = nodes filter { node sameZone }
 
-  def constrain(label: Label, element: SudokuNumber) = constrain(label._1, label._2, Set(element))
-  def constrain(col: SudokuNumber, row: SudokuNumber, element: SudokuNumber) = constrain(col, row, Set(element))
-  def constrain(label: Label, elements: Set[SudokuNumber]) = constrain(label._1, label._2, elements)
+  def constrain(label: Label, element: SudokuNumber):Graph = constrain(label._1, label._2, Set(element))
+  def constrain(col: SudokuNumber, row: SudokuNumber, element: SudokuNumber):Graph = constrain(col, row, Set(element))
+  def constrain(label: Label, elements: Set[SudokuNumber]):Graph = constrain(label._1, label._2, elements)
   def constrain(col: SudokuNumber, row: SudokuNumber, elements: Set[SudokuNumber]): Graph = {
     val oldNode = apply(col, row)
     val newCandidates = oldNode.candidates intersect elements
@@ -114,7 +114,8 @@ object GraphColouringProblem {
   }
 }
 
-trait GraphColouringProblem { self =>
+trait GraphColouringProblem {
+  self =>
 
   protected val graph: Graph
 
@@ -140,7 +141,9 @@ trait GraphColouringProblem { self =>
     // For each placement, place elements that have only one possible 
     // candidate and exclude value from neighbour candidate sets.
 
-    iterate(this) { _.singleEliminateByLatinBlockExclusion() }
+    iterate(this) {
+      _.singleEliminateByLatinBlockExclusion()
+    }
   }
 
   private def placementsFor(nodes: Set[Node]): Map[SudokuNumber, Set[Node]] = {
@@ -244,7 +247,9 @@ trait GraphColouringProblem { self =>
     var _graph = graph
     singlePlacementSets foreach {
       case (value, nodes) =>
-        val commonNeighbours = nodes map { node => graph(node.label).neighbourLabels } reduce { _ intersect _ }
+        val commonNeighbours = nodes map { node => graph(node.label).neighbourLabels } reduce {
+          _ intersect _
+        }
         commonNeighbours foreach { neighbourLabel =>
           _graph = _graph.constrain(neighbourLabel, SudokuNumber.set - value)
         }
@@ -298,8 +303,12 @@ trait GraphColouringProblem { self =>
       var _graph = graphColouringProblem.graph
 
       val nodesWithTwoElementCandidateSets: Set[Node] = _graph.twoElementPlacings
-      val partitionedByCandidateSets: Map[Set[SudokuNumber], Set[Node]] = nodesWithTwoElementCandidateSets groupBy { _.candidates }
-      val nonSingletonPartitions: Set[Set[Node]] = (partitionedByCandidateSets.values filter { _.size > 1 }).toSet
+      val partitionedByCandidateSets: Map[Set[SudokuNumber], Set[Node]] = nodesWithTwoElementCandidateSets groupBy {
+        _.candidates
+      }
+      val nonSingletonPartitions: Set[Set[Node]] = (partitionedByCandidateSets.values filter {
+        _.size > 1
+      }).toSet
 
       val twoElementCoverings: Set[(Node, Node)] = nonSingletonPartitions flatMap { partition =>
         partition cross partition
@@ -345,8 +354,12 @@ trait GraphColouringProblem { self =>
         }
       }
 
-      val partitionedByCandidateSets: Map[Set[SudokuNumber], Set[Node]] = nodesWithThreeElementCandidateSets groupBy { _.candidates }
-      val potentialPartitions: Set[Set[Node]] = partitionedByCandidateSets.values.toSet filter { _.size >= 3 }
+      val partitionedByCandidateSets: Map[Set[SudokuNumber], Set[Node]] = nodesWithThreeElementCandidateSets groupBy {
+        _.candidates
+      }
+      val potentialPartitions: Set[Set[Node]] = partitionedByCandidateSets.values.toSet filter {
+        _.size >= 3
+      }
 
       val threeElementCoverings: Set[(Node, Node, Node)] = potentialPartitions flatMap { partition =>
         (partition cross partition cross partition) map { case ((n1, n2), n3) => (n1, n2, n3) }
@@ -362,7 +375,11 @@ trait GraphColouringProblem { self =>
       connectedThreeElementCoverings foreach {
         case (n1, n2, n3) =>
           val coveringElements: Set[SudokuNumber] = n1.candidates ++ n2.candidates ++ n3.candidates
-          val commonNeighbours: Set[(SudokuNumber, SudokuNumber)] = n1.neighbourLabels filter { n2.neighbours } filter { n3.neighbours }
+          val commonNeighbours: Set[(SudokuNumber, SudokuNumber)] = n1.neighbourLabels filter {
+            n2.neighbours
+          } filter {
+            n3.neighbours
+          }
 
           commonNeighbours foreach { neighbourLabel =>
             _graph = _graph.constrain(neighbourLabel, SudokuNumber.set -- coveringElements)
@@ -379,7 +396,9 @@ trait GraphColouringProblem { self =>
     // Pick the node with smallest candidate set size > 1 and 
     // most constrained neighbours and try alternatives
 
-    val nodes: Map[Int, List[Node]] = graph.nodes.toList groupBy { _.candidates.size }
+    val nodes: Map[Int, List[Node]] = graph.nodes.toList groupBy {
+      _.candidates.size
+    }
     val candidateNodes = nodes.toList filter { case (size, _) => size > 1 }
 
     candidateNodes match {
@@ -419,7 +438,9 @@ trait GraphColouringProblem { self =>
     }
   }
 
-  lazy val candidateSetsSizeSum: Int = (graph.nodes.toList map { _.candidates.size }).sum
+  lazy val candidateSetsSizeSum: Int = (graph.nodes.toList map {
+    _.candidates.size
+  }).sum
   lazy val numPlacings = graph.oneElementPlacings.size
   lazy val solved = valid && numPlacings == 81
 
@@ -438,7 +459,9 @@ trait GraphColouringProblem { self =>
   lazy val toBoard: Board = Board(this)
 
   def canEqual(other: Any): Boolean = other.isInstanceOf[GraphColouringProblem]
+
   override def hashCode(): Int = graph.hashCode()
+
   override def equals(other: Any): Boolean = other.isInstanceOf[GraphColouringProblem] match {
     case true =>
       val that = other.asInstanceOf[GraphColouringProblem]
@@ -446,3 +469,4 @@ trait GraphColouringProblem { self =>
 
     case _ => false
   }
+}

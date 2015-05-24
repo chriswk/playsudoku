@@ -20,4 +20,4 @@ object Six extends SudokuNumber(6)
 object Seven extends SudokuNumber(7)
 object Eight extends SudokuNumber(8)
 object Nine extends SudokuNumber(9)
-}
+

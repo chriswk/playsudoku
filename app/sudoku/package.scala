@@ -11,7 +11,7 @@ package object sudoku {
   def quietly[T](action: => T): Option[T] = try {
     Some(action)
   } catch {
-    case _ => None
+    case _ : Throwable => None
   }
 
   def iterate[T](initial: T)(next: T => T): T = {

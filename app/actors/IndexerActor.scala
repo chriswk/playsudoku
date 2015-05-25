@@ -19,8 +19,8 @@ case class SudokuPuzzle(md5: String, idstring: String, created: Long,
     "created" -> created,
     "numPlacings" -> numPlacings,
     "difficulty" -> difficulty,
-    "md5Solution" -> md5Solution,
-    "idStringSolution" -> idStringSolution
+    "md5Solution" -> md5Solution.getOrElse(""),
+    "idStringSolution" -> idStringSolution.getOrElse("")
   )
 }
 
@@ -31,10 +31,9 @@ class IndexerActor extends Actor with ActorLogging {
 
   def receive = {
     case IndexBoard(graph) => {
-      log.info("Indexing against", esUrl)
       val board = graph.toBoard
-      val solution = Solved.unapply(graph)
-      val tempIndex = SudokuPuzzle(board.md5, board.toIdString, Instant.now().getNano, graph.numPlacings, Difficulty.difficulty(graph))
+      val solution = Solver.apply(graph).headOption
+      val tempIndex = SudokuPuzzle(board.md5, board.toIdString, Instant.now().toEpochMilli, graph.numPlacings, Difficulty.difficulty(graph))
       val toIndex = solution match {
         case Some(sol) => {
           val solvedBoard = sol.toBoard
@@ -47,6 +46,5 @@ class IndexerActor extends Actor with ActorLogging {
         index into "puzzles" / "sudoku" doc toIndex
       }
     }
-
   }
 }

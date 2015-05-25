@@ -3,6 +3,7 @@ package controllers
 import actors.BoardGeneratorActor
 import akka.actor.Props
 import play.api.libs.concurrent.Akka
+import play.api.libs.json.Json
 import sudoku._
 import sudoku.Generator
 import play.api._
@@ -45,7 +46,10 @@ object Sudoku extends Controller {
       }
     }
     puzzle match {
-      case Some(p) => Ok(p.toBoard.toIdString)
+      case Some(p) => {
+        val solution = Solver.apply(p)
+        Ok(Json.toJson(Map("board" -> p.toBoard.toIdString, "solution" -> solution.headOption.map(_.toBoard.toIdString).getOrElse(""))))
+      }
       case None => NoContent
     }
   }

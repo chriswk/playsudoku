@@ -78,7 +78,13 @@ case class Board(
   }
 
   def toIdString = {
-    toString.replaceAll("[^0-9_]", "")
+    rows.map { row => {
+      List(element(row.first), element(row.second), element(row.third),
+           element(row.fourth), element(row.fifth), element(row.sixth),
+           element(row.seventh), element(row.eight), element(row.ninth)
+      )
+    }}.flatten.mkString("")
+
   }
 }
 

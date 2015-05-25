@@ -26,6 +26,31 @@
                 }
         }
         </div>
+        <div class="solution sudoku">
+        @for(row <- 1 to 9) {
+            @for(col <- 1 to 9) {
+                <input id="solve@((row-1) * 9 + col)" class="r@(row) c@(col)
+                t@(if (row < 3) {
+                        if (col <= 3) 1
+                        else if (col <= 6) 2
+                        else 3
+                    } else if (row <= 6) {
+                        if (col <= 3) 4
+                        else if (col <= 6) 5
+                        else 6
+                    } else {
+                        if (col <= 3) 7
+                        else if (col <= 6) 8
+                        else 9
+                    }) @if(row % 3 == 1) { btop }
+                    @if(row % 3 == 0) { bbot }
+                    @if(col % 3 == 0) { bright }
+                    @if(col % 3 == 1) { bleft }"
+                type="text"
+                maxlength="1">
+                }
+        }
+        </div>
     </div>
 } {
 <script src="@routes.Assets.at("javascripts/fetchRandomBoard.js")"></script>

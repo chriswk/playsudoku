@@ -3,7 +3,8 @@ function fetchRandomBoard(url) {
         var numbers = data.split("");
         $.each(numbers, function (idx, val) {
             if (val !== "_") {
-                $("#input" + idx).val(val).trigger("keyup");
+                $("#input" + idx).val(val).prop("disabled", "disabled");
+
             }
         });
     });

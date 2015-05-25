@@ -50,7 +50,7 @@ case class Board(
 
   def row(i: SudokuNumber) = rows(i.representative - 1)
   def column(j: SudokuNumber) = columns(j.representative - 1)
-  def md5 = md5Hex(toIdString)
+  lazy val md5 = md5Hex(toIdString)
   lazy val toGraphColouringProblem: GraphColouringProblem = GraphColouringProblem(this)
 
   def element(value: Option[SudokuNumber]): String = value map { _.representative.toString } getOrElse "_"

@@ -10,9 +10,9 @@ class BoardGeneratorActor extends Actor with ActorLogging {
   val indexer = context.actorOf(Props[IndexerActor])
   def receive = {
     case GenerateBoard(difficulty, numberOfPlacements) => difficulty match {
-      case Easy => indexer ! Generator.generateEasyPuzzle().head
-      case Medium => indexer ! Generator.generateMediumPuzzle().head
-      case Hard => indexer ! Generator.generateHardPuzzle().head
+      case Easy => indexer ! IndexBoard(Generator.generateEasyPuzzle().head)
+      case Medium => indexer ! IndexBoard(Generator.generateMediumPuzzle().head)
+      case Hard => indexer ! IndexBoard(Generator.generateHardPuzzle().head)
     }
     case GenerateBoards(noOfBoards) => {
       for (i <- 1 to noOfBoards) {

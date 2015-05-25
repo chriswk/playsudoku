@@ -1,19 +1,51 @@
 package actors
 
+import java.time.Instant
+
 import akka.actor.{Actor, ActorLogging}
+import com.sksamuel.elastic4s.source.{DocumentMap, DocumentSource}
 import com.typesafe.config.{ConfigFactory, Config}
-import sudoku.{Difficulty, Board, GraphColouringProblem}
+import sudoku._
 import com.sksamuel.elastic4s.ElasticClient
 import com.sksamuel.elastic4s.ElasticDsl._
+
+case class SudokuPuzzle(md5: String, idstring: String, created: Long,
+                        numPlacings: Int, difficulty: Int,
+                        md5Solution: Option[String] = None,
+                        idStringSolution: Option[String] = None) extends DocumentMap {
+  def map = Map(
+    "md5" -> md5,
+    "idString" -> idstring,
+    "created" -> created,
+    "numPlacings" -> numPlacings,
+    "difficulty" -> difficulty,
+    "md5Solution" -> md5Solution,
+    "idStringSolution" -> idStringSolution
+  )
+}
 
 class IndexerActor extends Actor with ActorLogging {
   val conf = ConfigFactory.load()
   val esUrl = conf.getString("elasticsearch.url")
-  val client = ElasticClient.remote(esUrl, 9200)
+  val client = ElasticClient.remote(esUrl, 9300)
+
   def receive = {
-    case IndexBoard(graph, seed) => {
+    case IndexBoard(graph) => {
+      log.info("Indexing against", esUrl)
       val board = graph.toBoard
-      log.info(s"md5: [${board.md5}], idString: [${board.toIdString}}], difficulty: ${Difficulty.difficulty(graph)}")
+      val solution = Solved.unapply(graph)
+      val tempIndex = SudokuPuzzle(board.md5, board.toIdString, Instant.now().getNano, graph.numPlacings, Difficulty.difficulty(graph))
+      val toIndex = solution match {
+        case Some(sol) => {
+          val solvedBoard = sol.toBoard
+          tempIndex.copy(md5Solution = Some(solvedBoard.md5))
+            .copy(idStringSolution = Some(solvedBoard.toIdString))
+        }
+        case None => tempIndex
+      }
+      client.execute {
+        index into "puzzles" / "sudoku" doc toIndex
+      }
     }
 
   }

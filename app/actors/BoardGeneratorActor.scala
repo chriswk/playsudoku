@@ -13,6 +13,7 @@ class BoardGeneratorActor extends Actor with ActorLogging {
       case Easy => indexer ! IndexBoard(Generator.generateEasyPuzzle().head)
       case Medium => indexer ! IndexBoard(Generator.generateMediumPuzzle().head)
       case Hard => indexer ! IndexBoard(Generator.generateHardPuzzle().head)
+      case _ => ()
     }
     case GenerateBoards(noOfBoards) => {
       for (i <- 1 to noOfBoards) {

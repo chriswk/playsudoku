@@ -10,7 +10,7 @@ import com.sksamuel.elastic4s.ElasticClient
 import com.sksamuel.elastic4s.ElasticDsl._
 
 case class SudokuPuzzle(md5: String, idstring: String, created: Long,
-                        numPlacings: Int, difficulty: Int,
+                        numPlacings: Int, difficulty: Difficulty,
                         md5Solution: Option[String] = None,
                         idStringSolution: Option[String] = None) extends DocumentMap {
   def map = Map(
@@ -33,7 +33,7 @@ class IndexerActor extends Actor with ActorLogging {
     case IndexBoard(graph) => {
       val board = graph.toBoard
       val solution = Solver.apply(graph).headOption
-      val tempIndex = SudokuPuzzle(board.md5, board.toIdString, Instant.now().toEpochMilli, graph.numPlacings, Difficulty.difficulty(graph))
+      val tempIndex = SudokuPuzzle(board.md5, board.toIdString, Instant.now().toEpochMilli, graph.numPlacings, Difficulty(graph))
       val toIndex = solution match {
         case Some(sol) => {
           val solvedBoard = sol.toBoard

@@ -48,7 +48,7 @@ object Sudoku extends Controller {
     puzzle match {
       case Some(p) => {
         val solution = Solver.apply(p)
-        Ok(Json.toJson(Map("board" -> p.toBoard.toIdString, "solution" -> solution.headOption.map(_.toBoard.toIdString).getOrElse(""))))
+        Ok(Json.toJson(Map("board" -> p.toBoard.toIdString)))
       }
       case None => NoContent
     }

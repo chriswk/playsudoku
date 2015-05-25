@@ -4,13 +4,13 @@ function fetchRandomBoard(url) {
         $.each(numbers, function (idx, val) {
             var id = idx+1
             if (val !== "_") {
-                $("#input" + id).prop("value", val).val(val).prop("disabled", "disabled");
+                $("#input" + id).attr("value", val).val(val).prop("disabled", "disabled");
             }
         });
         var solution = data.solution.split("");
         $.each(solution, function (idx, val) {
             var id = idx+1;
-            $("#solve" +id).val(val).prop("disabled", "disabled");
+            $("#solve" +id).attr("value", val).val(val).prop("disabled", "disabled");
         });
     });
 }

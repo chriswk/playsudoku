@@ -1,5 +1,5 @@
 function fetchRandomBoard(url) {
-    $(".sudoku input").val("").attr("value", "");
+    $(".sudoku input").val("").attr("value", "").removeAttr("disabled");
 
     $.get(url, function (data) {
         var numbers = data.board.split("");

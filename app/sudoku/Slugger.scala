@@ -7,12 +7,12 @@ object Slugger {
       if(num == 0 && soFar.isEmpty) List('0')
       else if (num == 0) soFar
       else {
-        val identifier = num % 60
+        val identifier = math.abs(num % 60)
         val char = chars(identifier)
         recur((num - identifier) / 60, char :: soFar)
       }
     }
-    recur(num, List()).mkString
+    recur(math.abs(num), List()).mkString
   }
 
   def string2Slug(s: String): String = {

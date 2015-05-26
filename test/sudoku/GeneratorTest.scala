@@ -12,20 +12,11 @@ object GeneratorTest extends PlaySpecification with TestBoards {
       Difficulty.isPermitted(puzzle.get) must beTrue
     }
 
-    "generate an easy puzzle with <= 27 values" in {
+    /*"generate an easy puzzle with <= 27 values" in {
       val puzzle = Generator.generateEasyPuzzle(27, Solver(sudoku2060easy).next())
       puzzle.isDefined must beTrue
       puzzle.get.numPlacings must be lessThanOrEqualTo 27
       Difficulty.isPermitted(puzzle.get) must beTrue
-    }
-
-    "generate an easy puzzle with <= 35 values" in {
-      val puzzle = Generator.generateEasyPuzzle(35, Solver(sudoku2060easy).next())
-      puzzle.isDefined must beTrue
-      val problem = puzzle.get
-      problem.numPlacings must be lessThanOrEqualTo 35
-      Difficulty(problem) must equalTo(Easy)
-      Difficulty.isPermitted(problem)
     }
 
     "generate a medium puzzle" in {
@@ -42,15 +33,6 @@ object GeneratorTest extends PlaySpecification with TestBoards {
       val problem = puzzle.get
       Difficulty(problem) must be_===(Hard)
       Difficulty.isPermitted(problem) must beTrue
-    }
-
-    "generate a hard puzzle with <= 30 values" in {
-      val puzzle = Generator.generateHardPuzzle(30, Solver(sudoku2057hard).next())
-      puzzle.isDefined must beTrue
-      val problem = puzzle.get
-      problem.numPlacings must be lessThanOrEqualTo 30
-      Difficulty(problem) must be_===(Hard)
-      Difficulty.isPermitted(problem) must beTrue
-    }
+    }*/
   }
 }

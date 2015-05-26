@@ -52,7 +52,7 @@ case class Board(
   def column(j: SudokuNumber) = columns(j.representative - 1)
   lazy val md5 = md5Hex(toIdString)
   lazy val toGraphColouringProblem: GraphColouringProblem = GraphColouringProblem(this)
-
+  lazy val shortSlug = Slugger.string2Slug(md5)
   def element(value: Option[SudokuNumber]): String = value map { _.representative.toString } getOrElse "_"
 
   override def toString = {
@@ -86,6 +86,8 @@ case class Board(
     }}.flatten.mkString("")
 
   }
+
+
 }
 
 object Board {

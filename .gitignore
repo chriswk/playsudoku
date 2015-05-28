@@ -16,4 +16,7 @@ server.pid
 /dist/
 .cache
 .idea
-
+data
+.sbtserver
+project/.sbtserver
+RUNNING_PID

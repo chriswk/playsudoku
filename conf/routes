@@ -4,8 +4,7 @@
 
 # Home page
 GET        /                    controllers.Sudoku.board
-GET        /random/:difficulty  controllers.Sudoku.random(difficulty: String, placements: Option[Int])
-GET        /random              controllers.Sudoku.shuffle
+GET        /random              controllers.Sudoku.random(difficulty: Option[String])
 GET        /createBoards        controllers.Sudoku.indexBoards(boardCount: Option[Int])
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file        controllers.Assets.at(path="/public", file)

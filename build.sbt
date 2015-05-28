@@ -19,3 +19,6 @@ libraryDependencies ++= Seq(
   "com.sksamuel.elastic4s" %% "elastic4s" % "1.5.10",
   "org.scalacheck" %% "scalacheck" % "1.12.3" % "test"
 )
+
+
+fork in run := true

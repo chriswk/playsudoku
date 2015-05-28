@@ -21,21 +21,23 @@ case class SudokuPuzzle(md5: String, idstring: String, created: Long,
     "numPlacings" -> numPlacings,
     "difficulty" -> difficulty,
     "md5Solution" -> md5Solution.getOrElse(""),
-    "idStringSolution" -> idStringSolution.getOrElse("")
+    "idStringSolution" -> idStringSolution.getOrElse(""),
+    "slug" -> Slugger.string2Slug(idstring)
   )
 }
 
 case class Solution(md5: String, idString: String) extends DocumentMap {
   def map = Map(
     "md5" -> md5,
-    "idString" -> idString
+    "idString" -> idString,
+    "slug" -> Slugger.string2Slug(idString)
   )
 }
 
 class IndexerActor extends Actor with ActorLogging {
   val conf = ConfigFactory.load()
   val esUrl = conf.getString("elasticsearch.url")
-  val client = ElasticClient.remote(esUrl, 9300)
+  val client = ElasticClient.local
   implicit val solution = Json.format[Solution]
   def receive = {
     case IndexBoard(graph) => {

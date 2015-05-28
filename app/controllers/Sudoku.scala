@@ -6,9 +6,13 @@ import play.api.libs.concurrent.Akka
 import play.api.libs.json.Json
 import sudoku._
 import sudoku.Generator
+import sudoku.StoredBoards
 import play.api._
 import play.api.mvc._
 import play.api.Play.current
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
+
+
 
 import scala.util.Random
 
@@ -18,42 +22,28 @@ object Sudoku extends Controller {
     Ok(views.html.board())
   }
 
-  def shuffle() = Random.nextInt(3) match {
-    case 0 => random("easy")
-    case 1 => random("medium")
-    case 2 => random("hard")
-  }
 
-  def random(difficulty: String, placements: Option[Int] = None) = Action {
-    val puzzle: Option[GraphColouringProblem] = difficulty.toLowerCase match {
-      case "easy" => {
-        placements match {
-          case Some(maxPlacements) => Generator.generateEasyPuzzle(maxPlacements)
-          case None => Generator.generateEasyPuzzle()
-        }
-      }
-      case "medium" => {
-        placements match {
-          case Some(maxPlacements) => Generator.generateMediumPuzzle(maxPlacements)
-          case None => Generator.generateMediumPuzzle()
-        }
-      }
-      case "hard" => {
-        placements match {
-          case Some(maxPlacements) => Generator.generateHardPuzzle(maxPlacements)
-          case None => Generator.generateHardPuzzle()
-        }
-      }
-    }
-    puzzle match {
-      case Some(p) => {
-        val solution = Solver.apply(p)
-        Ok(Json.toJson(Map("board" -> p.toBoard.toIdString)))
-      }
-      case None => NoContent
-    }
+  def shuffleDifficulty(): Difficulty = Random.nextInt(3) match {
+      case 0 => Easy
+      case 1 => Medium
+      case 2 => Hard
   }
-
+  
+  def random(difficulty: Option[String] = None) = Action.async {
+      val board = difficulty match {
+          case Some(diff) => diff match {
+              case "easy" => StoredBoards.getRandomBoard(Easy)
+              case "medium" => StoredBoards.getRandomBoard(Medium)
+              case "hard" => StoredBoards.getRandomBoard(Hard)
+          }
+          case None => StoredBoards.getRandomBoard(shuffleDifficulty())
+      }
+      board.map { b =>
+        Json.toJson(Map("board" -> b.toIdString))
+      }.map { r =>
+        Ok(r)
+      }
+  }
   def indexBoards(boardCount: Option[Int]) = Action {
     boardCount match {
       case Some(c) => boardGen ! actors.GenerateBoards(c)
